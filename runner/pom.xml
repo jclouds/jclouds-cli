@@ -18,12 +18,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>jclouds-cli-pom</artifactId>
-        <groupId>org.jclouds.cli</groupId>
+        <groupId>org.apache.jclouds.cli</groupId>
         <version>1.7.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.jclouds.cli</groupId>
+    <groupId>org.apache.jclouds.cli</groupId>
     <artifactId>runner</artifactId>
     <version>1.7.0-SNAPSHOT</version>
     <name>jclouds :: cli :: runner</name>
@@ -36,13 +36,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jclouds</groupId>
+            <groupId>org.apache.jclouds</groupId>
             <artifactId>jclouds-blobstore</artifactId>
             <version>${jclouds.karaf.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.jclouds</groupId>
+            <groupId>org.apache.jclouds</groupId>
             <artifactId>jclouds-core</artifactId>
             <version>${jclouds.karaf.version}</version>
         </dependency>
