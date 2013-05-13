@@ -3,13 +3,13 @@
   <parent>
     <artifactId>jclouds-cli-pom</artifactId>
     <groupId>org.apache.jclouds.cli</groupId>
-    <version>1.5.9-SNAPSHOT</version>
+    <version>1.5.11-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.jclouds.cli</groupId>
   <artifactId>branding</artifactId>
-  <version>1.5.9-SNAPSHOT</version>
+  <version>1.5.11-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>jclouds :: cli :: branding</name>
 
