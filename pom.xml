@@ -19,9 +19,9 @@
   <modelVersion>4.0.0</modelVersion>
   
   <parent>
-    <groupId>org.sonatype.oss</groupId>
-    <artifactId>oss-parent</artifactId>
-    <version>4</version>
+    <groupId>org.apache</groupId>
+    <artifactId>apache</artifactId>
+    <version>13</version>
   </parent>
 
   <groupId>org.apache.jclouds.cli</groupId>
@@ -187,6 +187,16 @@
 
   <repositories>
     <repository>
+      <id>apache-snapshots</id>
+      <url>https://repository.apache.org/content/repositories/snapshots</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <id>sonatype</id>
       <url>https://oss.sonatype.org/content/repositories/releases/</url>
     </repository>
@@ -221,17 +231,5 @@
       </build>
     </profile>
   </profiles>
-
-  <distributionManagement>
-    <repository>
-      <id>sonatype-nexus-staging</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-      <uniqueVersion>false</uniqueVersion>
-    </repository>
-    <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-  </distributionManagement>
 
 </project>
