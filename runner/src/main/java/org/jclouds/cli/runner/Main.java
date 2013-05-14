@@ -34,6 +34,7 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.TimeoutException;
 import jline.Terminal;
 import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Command;
@@ -67,6 +68,7 @@ public class Main {
         ENOENT(2),
         EIO(5),
         EACCES(13),
+        ETIMEDOUT(110),
         UNKNOWN(255);
 
         private final int errno;
@@ -112,6 +114,9 @@ public class Main {
         } catch (KeyNotFoundException knfe) {
             System.err.println("Blob not found: " + knfe.getMessage());
             System.exit(Errno.ENOENT.getErrno());
+        } catch (TimeoutException te) {
+            System.err.println("Timeout: " + te.getMessage());
+            System.exit(Errno.ETIMEDOUT.getErrno());
         } catch (Throwable t) {
             t.printStackTrace();
             System.exit(Errno.UNKNOWN.getErrno());
