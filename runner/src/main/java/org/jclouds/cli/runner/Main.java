@@ -53,6 +53,7 @@ import org.fusesource.jansi.AnsiConsole;
 import org.jclouds.blobstore.ContainerNotFoundException;
 import org.jclouds.blobstore.KeyNotFoundException;
 import org.jclouds.rest.AuthorizationException;
+import org.jclouds.rest.InsufficientResourcesException;
 
 /**
  * This is forked from Apache Karaf and aligned to the needs of jclouds cli.
@@ -69,6 +70,7 @@ public class Main {
         EIO(5),
         EACCES(13),
         ETIMEDOUT(110),
+        EDQUOT(122),
         UNKNOWN(255);
 
         private final int errno;
@@ -111,6 +113,9 @@ public class Main {
         } catch (IOException ioe) {
             System.err.println("IO error: " + ioe.getMessage());
             System.exit(Errno.EIO.getErrno());
+        } catch (InsufficientResourcesException ire) {
+            System.err.println("Insufficient resources: " + ire.getMessage());
+            System.exit(Errno.EDQUOT.getErrno());
         } catch (KeyNotFoundException knfe) {
             System.err.println("Blob not found: " + knfe.getMessage());
             System.exit(Errno.ENOENT.getErrno());
