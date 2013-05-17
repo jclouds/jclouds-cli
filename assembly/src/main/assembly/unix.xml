@@ -116,15 +116,15 @@
             <outputFileNameMapping>jclouds-version.jar</outputFileNameMapping>
             <fileMode>0644</fileMode>
             <includes>
-                <include>org.jclouds.cli:branding</include>
+                <include>org.apache.jclouds.cli:branding</include>
             </includes>
             <useTransitiveDependencies>false</useTransitiveDependencies>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>/system/org/jclouds/cli/runner/${project.version}/</outputDirectory>
+            <outputDirectory>/system/org/apache/jclouds/cli/runner/${project.version}/</outputDirectory>
             <fileMode>0644</fileMode>
             <includes>
-                <include>org.jclouds.cli:runner</include>
+                <include>org.apache.jclouds.cli:runner</include>
             </includes>
         </dependencySet>
         <dependencySet>
