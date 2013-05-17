@@ -169,7 +169,7 @@
                   mvn:org.apache.karaf.assemblies.features/standard/${karaf.version}/xml/features
                 </descriptor>
                 <descriptor>
-                  mvn:org.jclouds.karaf/jclouds-karaf/${jclouds.karaf.version}/xml/features
+                  mvn:org.apache.jclouds.karaf/jclouds-karaf/${jclouds.karaf.version}/xml/features
                 </descriptor>
               </descriptors>
               <features>
