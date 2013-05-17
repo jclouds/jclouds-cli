@@ -178,7 +178,6 @@
                 <feature>jclouds-guice</feature>
                 <feature>jclouds</feature>
                 <feature>jclouds-compute</feature>
-                <feature>jclouds-nodepool</feature>
                 <feature>jclouds-api-filesystem</feature>
                 <feature>jclouds-api-elasticstack</feature>
                 <feature>jclouds-api-vcloud</feature>
@@ -191,11 +190,6 @@
                 <feature>jclouds-api-cloudstack</feature>
                 <feature>jclouds-api-rackspace-cloudidentity</feature>
                 <feature>jclouds-api-chef</feature>
-                <feature>jclouds-driver-jsch</feature>
-                <feature>jclouds-driver-sshj</feature>
-                <feature>jclouds-driver-slf4j</feature>
-                <feature>jclouds-driver-log4j</feature>
-                <feature>jclouds-driver-bouncycastle</feature>
                 <feature>jclouds-aws-cloudwatch</feature>
                 <feature>jclouds-aws-ec2</feature>
                 <feature>jclouds-aws-s3</feature>
@@ -222,22 +216,14 @@
                 <feature>jclouds-greenhousedata-element-vcloud</feature>
                 <feature>jclouds-hpcloud-objectstorage</feature>
                 <feature>jclouds-hpcloud-compute</feature>
-                <feature>jclouds-trystack-nova</feature>
                 <feature>jclouds-ninefold-storage</feature>
                 <feature>jclouds-ninefold-compute</feature>
                 <feature>jclouds-openhosting-east1</feature>
                 <feature>jclouds-serverlove-z1-man</feature>
                 <feature>jclouds-skalicloud-sdg-my</feature>
                 <feature>jclouds-softlayer</feature>
-                <feature>jclouds-synaptic-storage</feature>
-                <feature>jclouds-stratogen-vcloud-mycloud</feature>
                 <feature>jclouds-trmk-ecloud</feature>
-                <feature>jclouds-trystack-nova</feature>
                 <feature>jclouds-trmk-vcloudexpress</feature>
-                <feature>jclouds-joyent-cloudapi</feature>
-                <feature>jclouds-joyent</feature>
-                <feature>jclouds-greenqloud-storage</feature>
-                <feature>jclouds-greenqloud-compute</feature>
                 <feature>jclouds-services</feature>
                 <feature>jclouds-commands</feature>
                 <feature>jclouds-chef</feature>
