@@ -120,7 +120,7 @@ set CLASSPATH=%CLASSPATH%;%KARAF_HOME%\etc\log4j.properties
     if "%SHIFT%" == "true" SET ARGS=%2 %3 %4 %5 %6 %7 %8
     if not "%SHIFT%" == "true" SET ARGS=%1 %2 %3 %4 %5 %6 %7 %8
     rem Execute the Java Virtual Machine
-    "%JAVA%" %JAVA_OPTS% %OPTS% -classpath "%CLASSPATH%" -Dkaraf.instances="%KARAF_HOME%\instances" -Dkaraf.home="%KARAF_HOME%" -Dkaraf.base="%KARAF_BASE%" -Djava.io.tmpdir="%KARAF_DATA%\tmp" -Dlog4j.configuration="file:///%KARAF_BASE%\etc\java.util.logging.properties" %KARAF_OPTS% org.apache.jclouds.cli.runner.Main %ARGS%
+    "%JAVA%" %JAVA_OPTS% %OPTS% -classpath "%CLASSPATH%" -Dkaraf.instances="%KARAF_HOME%\instances" -Dkaraf.home="%KARAF_HOME%" -Dkaraf.base="%KARAF_BASE%" -Djava.io.tmpdir="%KARAF_DATA%\tmp" -Dlog4j.configuration="file:///%KARAF_BASE%\etc\java.util.logging.properties" %KARAF_OPTS% org.jclouds.cli.runner.Main %ARGS%
 
 rem # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
