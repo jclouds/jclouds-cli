@@ -54,6 +54,7 @@ import org.jclouds.blobstore.ContainerNotFoundException;
 import org.jclouds.blobstore.KeyNotFoundException;
 import org.jclouds.rest.AuthorizationException;
 import org.jclouds.rest.InsufficientResourcesException;
+import org.jclouds.util.Throwables2;
 
 /**
  * This is forked from Apache Karaf and aligned to the needs of jclouds cli.
@@ -84,6 +85,20 @@ public class Main {
         }
     }
 
+    /**
+     * Exit if klass has the same type or sub-type as throwable or one of its
+     * causes.  If exiting, emit message.
+     */
+    private static void exitIfThrowableMatches(Throwable throwable,
+            Class klass, Errno errno, String message) {
+        Throwable cause = Throwables2.getFirstThrowableOfType(throwable, klass);
+        if (cause == null) {
+            return;
+        }
+        System.err.format("%s: %s\n", message, cause.getMessage());
+        System.exit(errno.getErrno());
+    }
+
     public static void main(String args[]) throws Exception {
         Main main = new Main();
         try {
@@ -101,28 +116,15 @@ public class Main {
         } catch (CommandException ce) {
             System.err.println(ce.getNiceHelp());
             System.exit(Errno.UNKNOWN.getErrno());
-        } catch (AuthorizationException ae) {
-            System.err.println("Authorization error: " + ae.getMessage());
-            System.exit(Errno.EACCES.getErrno());
-        } catch (ContainerNotFoundException cnfe) {
-            System.err.println("Container not found: " + cnfe.getMessage());
-            System.exit(Errno.ENOENT.getErrno());
-        } catch (FileNotFoundException fnfe) {
-            System.err.println("File not found: " + fnfe.getMessage());
-            System.exit(Errno.ENOENT.getErrno());
-        } catch (IOException ioe) {
-            System.err.println("IO error: " + ioe.getMessage());
-            System.exit(Errno.EIO.getErrno());
-        } catch (InsufficientResourcesException ire) {
-            System.err.println("Insufficient resources: " + ire.getMessage());
-            System.exit(Errno.EDQUOT.getErrno());
-        } catch (KeyNotFoundException knfe) {
-            System.err.println("Blob not found: " + knfe.getMessage());
-            System.exit(Errno.ENOENT.getErrno());
-        } catch (TimeoutException te) {
-            System.err.println("Timeout: " + te.getMessage());
-            System.exit(Errno.ETIMEDOUT.getErrno());
         } catch (Throwable t) {
+            exitIfThrowableMatches(t, AuthorizationException.class, Errno.EACCES, "Authorization error");
+            exitIfThrowableMatches(t, ContainerNotFoundException.class, Errno.ENOENT, "Container not found");
+            // FileNotFoundException must precede IOException due to inheritance
+            exitIfThrowableMatches(t, FileNotFoundException.class, Errno.ENOENT, "File not found");
+            exitIfThrowableMatches(t, IOException.class, Errno.EIO, "IO error");
+            exitIfThrowableMatches(t, InsufficientResourcesException.class, Errno.EDQUOT, "Insufficient resources");
+            exitIfThrowableMatches(t, KeyNotFoundException.class, Errno.ENOENT, "Blob not found");
+            exitIfThrowableMatches(t, TimeoutException.class, Errno.ETIMEDOUT, "Timeout");
             t.printStackTrace();
             System.exit(Errno.UNKNOWN.getErrno());
         }
