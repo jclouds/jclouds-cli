@@ -118,7 +118,7 @@ set CATEGORY=%1
 set ACTION=%2
 
 :EXECUTE
-﻿SHIFT
+SHIFT
 SHIFT
     if "%SHIFT%" == "true" SET ARGS=%2 %3 %4 %5 %6 %7 %8
     if not "%SHIFT%" == "true" SET ARGS=%1 %2 %3 %4 %5 %6 %7 %8
