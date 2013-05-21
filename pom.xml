@@ -98,7 +98,6 @@
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
         <version>0.8</version>
-        <inherited>false</inherited>
         <executions>
           <execution>
             <phase>package</phase>
