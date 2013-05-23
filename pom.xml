@@ -40,9 +40,10 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git://github.com/jclouds/jclouds-cli.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/jclouds/jclouds-cli.git</developerConnection>
-    <url>http://github.com/jclouds/jclouds-cli</url>
+    <connection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-jclouds-cli.git</connection>
+    <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-jclouds-cli.git</developerConnection>
+    <url>https://git-wip-us.apache.org/repos/asf?p=incubator-jclouds-cli.git</url>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
