@@ -48,7 +48,7 @@ if "%JAVA_MAX_MEM%" == "" (
 goto BEGIN
 
 :warn
-    echo %PROGNAME%: %*
+    echo %PROGNAME%: %* >&2
 goto :EOF
 
 :BEGIN

@@ -48,7 +48,7 @@ if [ "x$JAVA_MAX_PERM_MEM" = "x" ]; then
 fi
 
 warn() {
-    echo "${PROGNAME}: $*"
+    echo "${PROGNAME}: $*" >&2
 }
 
 die() {
