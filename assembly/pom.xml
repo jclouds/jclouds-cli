@@ -17,14 +17,14 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>jclouds-cli-pom</artifactId>
+    <artifactId>jclouds-cli</artifactId>
     <groupId>org.apache.jclouds.cli</groupId>
     <version>1.6.1-incubating</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.jclouds.cli</groupId>
-  <artifactId>jclouds-cli</artifactId>
+  <artifactId>jclouds-cli-assembly</artifactId>
   <version>1.6.1-incubating</version>
   <name>jclouds :: cli :: assembly</name>
 
@@ -286,7 +286,7 @@
               <descriptors>
                 <descriptor>src/main/assembly/unix.xml</descriptor>
               </descriptors>
-              <finalName>${project.artifactId}-${project.version}</finalName>
+              <finalName>jclouds-cli-${project.version}</finalName>
               <tarLongFileMode>gnu</tarLongFileMode>
               <appendAssemblyId>false</appendAssemblyId>
             </configuration>
@@ -301,7 +301,7 @@
               <descriptors>
                 <descriptor>src/main/assembly/win.xml</descriptor>
               </descriptors>
-              <finalName>${project.artifactId}-${project.version}</finalName>
+              <finalName>jclouds-cli-${project.version}</finalName>
               <appendAssemblyId>false</appendAssemblyId>
             </configuration>
           </execution>
