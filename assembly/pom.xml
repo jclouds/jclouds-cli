@@ -19,13 +19,13 @@
   <parent>
     <artifactId>jclouds-cli</artifactId>
     <groupId>org.apache.jclouds.cli</groupId>
-    <version>1.6.1-SNAPSHOT</version>
+    <version>1.6.1-incubating</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.jclouds.cli</groupId>
   <artifactId>jclouds-cli-assembly</artifactId>
-  <version>1.6.1-SNAPSHOT</version>
+  <version>1.6.1-incubating</version>
   <name>jclouds :: cli :: assembly</name>
 
   <dependencies>
