@@ -113,10 +113,20 @@
         </executions>
         <configuration>
           <excludes>
+
+            <!-- prevent duplicating license -->
+            <exclude>**/LICENSE.txt</exclude>
+            <exclude>**/header.txt</exclude>
+
+            <!-- high-level project metadata -->
+            <exclude>**/NOTICE.txt</exclude>
+            <exclude>**/DISCLAIMER</exclude>
             <exclude>**/BUILD.txt</exclude>
             <exclude>**/CHANGES.txt</exclude>
-            <exclude>**/NOTICE-src.txt</exclude>
             <exclude>**/README.md</exclude>
+            <exclude>**/README.txt</exclude>
+            <exclude>**/DEPENDENCIES</exclude>
+
             <exclude>.git/**</exclude>
             <exclude>**/.gitignore</exclude>
             <exclude>**/*.json</exclude>
