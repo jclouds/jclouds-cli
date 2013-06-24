@@ -223,6 +223,8 @@ public class Main {
                 // list options
                 sb.append("\n\nOptions:")
                     .append('\n').append(INDENT)
+                    .append("--properties: File containing properties")
+                    .append('\n').append(INDENT)
                     .append("--provider:   The id of the provider")
                     .append('\n').append(INDENT)
                     .append("--api:        The id of the api")
