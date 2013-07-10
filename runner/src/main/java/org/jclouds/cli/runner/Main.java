@@ -27,6 +27,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -70,6 +71,7 @@ public class Main {
     private static enum Errno {
         ENOENT(2),
         EIO(5),
+        ENXIO(6),
         EACCES(13),
         ETIMEDOUT(110),
         EDQUOT(122),
@@ -122,6 +124,8 @@ public class Main {
             exitIfThrowableMatches(t, ContainerNotFoundException.class, Errno.ENOENT, "Container not found");
             // FileNotFoundException must precede IOException due to inheritance
             exitIfThrowableMatches(t, FileNotFoundException.class, Errno.ENOENT, "File not found");
+            // UnknownHostException must precede IOException due to inheritance
+            exitIfThrowableMatches(t, UnknownHostException.class, Errno.ENXIO, "Unknown host");
             exitIfThrowableMatches(t, IOException.class, Errno.EIO, "IO error");
             exitIfThrowableMatches(t, InsufficientResourcesException.class, Errno.EDQUOT, "Insufficient resources");
             exitIfThrowableMatches(t, KeyNotFoundException.class, Errno.ENOENT, "Blob not found");
