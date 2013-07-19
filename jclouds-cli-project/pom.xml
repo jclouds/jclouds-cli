@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>org.apache.jclouds</groupId>
+    <artifactId>jclouds-project</artifactId>
+    <version>1.7.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>org.apache.jclouds.cli</groupId>
+  <artifactId>jclouds-cli-project</artifactId>
+  <packaging>pom</packaging>
+  <!-- VERSION same as parent -->
+  <name>Apache jclouds :: cli</name>
+
+  <url>http://jclouds.incubator.apache.org</url>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-jclouds-cli.git</connection>
+    <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-jclouds-cli.git</developerConnection>
+    <url>https://git-wip-us.apache.org/repos/asf?p=incubator-jclouds-cli.git</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>iocanel</id>
+      <name>Ioannis Canellos</name>
+      <email>iocanel@gmail.com</email>
+      <url>http://iocanel.blogspot.com</url>
+    </developer>
+    <developer>
+      <id>abayer</id>
+      <name>Andew Bayer</name>
+      <email>abayer@apache.org</email>
+      <url>http://andrewbayer.com</url>
+    </developer>
+  </developers>  
+
+  <properties>
+    <!-- Karaf Version Dependencies -->
+    <karaf.version>2.2.7</karaf.version>
+    <pax.url.version>1.2.8</pax.url.version>
+    <pax.logging.version>1.6.5</pax.logging.version>
+    <felix.configadmin.version>1.2.8</felix.configadmin.version>
+    <aries.util.version>0.3</aries.util.version>
+    <aries.proxy.version>0.3</aries.proxy.version>
+    <aries.blueprint.version>0.3.1</aries.blueprint.version>
+    <aries.jmx.version>0.3</aries.jmx.version>
+    <asm.bundle.version>3.3.1_1</asm.bundle.version>
+    <felix.fileinstall.version>3.2.2</felix.fileinstall.version>
+    <jclouds.karaf.version>${project.parent.version}</jclouds.karaf.version>
+    <jclouds.version>${project.parent.version}</jclouds.version>
+    <log4j.version>1.2.17</log4j.version>
+    <slf4j.version>1.6.6</slf4j.version>
+    <!-- Plugin Versions -->
+    <maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
+    <maven-assembly-plugin.version>2.2.1</maven-assembly-plugin.version>
+    <maven-bundle-plugin.version>2.1.0</maven-bundle-plugin.version>
+    <maven-compiler-plugin.version>2.0.2</maven-compiler-plugin.version>
+    <maven-release-plugin.version>2.4</maven-release-plugin.version>
+    <maven-resources-plugin.version>2.4.2</maven-resources-plugin.version>
+    <build-helper-maven-plugin.version>1.5</build-helper-maven-plugin.version>
+
+    <sourceReleaseAssemblyDescriptor>source-release-zip-tar</sourceReleaseAssemblyDescriptor>
+    
+    <!-- Skip the duplicate finder. Note that otherwise maven will fail building -->
+    <skipDuplicateFinder>true</skipDuplicateFinder>
+  </properties>
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.karaf.shell</groupId>
+        <artifactId>org.apache.karaf.shell.console</artifactId>
+        <version>${karaf.version}</version>
+      </dependency>
+      <!-- NOTE, jclouds dependencies are not managed from here -->
+      <dependency>
+        <groupId>org.apache.karaf</groupId>
+        <artifactId>apache-karaf</artifactId>
+        <version>${karaf.version}</version>
+        <type>tar.gz</type>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.karaf</groupId>
+        <artifactId>apache-karaf</artifactId>
+        <version>${karaf.version}</version>
+        <type>zip</type>
+      </dependency>
+      <!-- External Logging Dependencies -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>  
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.rat</groupId>
+        <artifactId>apache-rat-plugin</artifactId>
+        <version>0.8</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <excludes>
+
+            <!-- prevent duplicating license -->
+            <exclude>**/LICENSE.txt</exclude>
+            <exclude>**/header.txt</exclude>
+
+            <!-- high-level project metadata -->
+            <exclude>**/NOTICE.txt</exclude>
+            <exclude>**/DISCLAIMER</exclude>
+            <exclude>**/BUILD.txt</exclude>
+            <exclude>**/CHANGES.txt</exclude>
+            <exclude>**/README.md</exclude>
+            <exclude>**/README.txt</exclude>
+            <exclude>**/DEPENDENCIES</exclude>
+
+            <exclude>.git/**</exclude>
+            <exclude>**/.gitignore</exclude>
+            <exclude>**/*.json</exclude>
+            <exclude>**/*.log*</exclude>
+            <exclude>**/TODO</exclude>
+            <exclude>.mailmap</exclude>
+            <exclude>.idea/**</exclude>
+            <exclude>**/*.iml</exclude>
+            <exclude>**/.project</exclude>
+            <exclude>**/.classpath</exclude>
+            <exclude>**/.settings/**</exclude>
+            <exclude>**/.checkstyle</exclude>
+            <exclude>**/target/**</exclude>
+            <exclude>.repository/**</exclude>
+            <!-- binary -->
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>${maven-bundle-plugin.version}</version>
+        <extensions>true</extensions>
+        <inherited>true</inherited>
+        <configuration>
+          <instructions>
+            <Bundle-Name>${project.name}</Bundle-Name>
+            <Bundle-SymbolicName>org.apache.jclouds.cli.${project.artifactId}</Bundle-SymbolicName>
+            <Export-Package>${osgi.export}</Export-Package>
+            <Import-Package>${osgi.import}</Import-Package>
+            <DynamicImport-Package>${osgi.dynamic.import}</DynamicImport-Package>
+            <Private-Package>${osgi.private}</Private-Package>
+            <Require-Bundle>${osgi.bundles}</Require-Bundle>
+            <Bundle-Activator>${osgi.activator}</Bundle-Activator>
+          </instructions>
+          <supportedProjectTypes>
+            <supportedProjectType>jar</supportedProjectType>
+            <supportedProjectType>war</supportedProjectType>
+            <supportedProjectType>bundle</supportedProjectType>
+          </supportedProjectTypes>
+          <unpackBundle>true</unpackBundle>
+        </configuration>
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>manifest</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>${maven-release-plugin.version}</version>
+        <configuration>
+          <useReleaseProfile>false</useReleaseProfile>
+          <goals>deploy</goals>
+          <arguments>-Pdoc -Papache-release ${arguments}</arguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
