@@ -22,15 +22,13 @@
   <parent>
     <groupId>org.apache.jclouds.cli</groupId>
     <artifactId>jclouds-cli-project</artifactId>
-    <relativePath>jclouds-cli-project</relativePath>
+    <relativePath>project</relativePath>
     <version>1.7.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>org.apache.jclouds.cli</groupId>
   <artifactId>jclouds-cli</artifactId>
   <packaging>pom</packaging>
   <name>Apache jclouds :: cli</name>
-  <version>1.7.0-SNAPSHOT</version>
 
   <url>http://jclouds.apache.org</url>
   <licenses>
@@ -57,17 +55,17 @@
     </developer>
     <developer>
       <id>abayer</id>
-      <name>Andew Bayer</name>
+      <name>Andrew Bayer</name>
       <email>abayer@apache.org</email>
       <url>http://andrewbayer.com</url>
     </developer>
   </developers>
 
   <modules>
+    <module>project</module>
     <module>branding</module>
     <module>assembly</module>
     <module>runner</module>
-    <module>jclouds-cli-project</module>
   </modules>
   
   <repositories>
