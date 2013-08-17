@@ -30,7 +30,7 @@
   <artifactId>jclouds-cli</artifactId>
   <packaging>pom</packaging>
   <name>Apache jclouds :: cli</name>
-  <version>1.6.2-SNAPSHOT</version>
+  <version>1.6.2-incubating</version>
 
   <url>http://jclouds.incubator.apache.org</url>
   <licenses>
@@ -45,7 +45,7 @@
     <connection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-jclouds-cli.git</connection>
     <developerConnection>scm:git:https://git-wip-us.apache.org/repos/asf/incubator-jclouds-cli.git</developerConnection>
     <url>https://git-wip-us.apache.org/repos/asf?p=incubator-jclouds-cli.git</url>
-    <tag>HEAD</tag>
+    <tag>jclouds-cli-1.6.2-incubating-rc2</tag>
   </scm>
 
   <developers>
