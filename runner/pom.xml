@@ -22,13 +22,13 @@
   <parent>
     <artifactId>jclouds-cli</artifactId>
     <groupId>org.apache.jclouds.cli</groupId>
-    <version>1.6.2-incubating</version>
+    <version>1.6.2-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.jclouds.cli</groupId>
   <artifactId>runner</artifactId>
-  <version>1.6.2-incubating</version>
+  <version>1.6.2-SNAPSHOT</version>
   <name>jclouds :: cli :: runner</name>
 
   <dependencies>
