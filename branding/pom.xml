@@ -22,13 +22,13 @@
   <parent>
     <artifactId>jclouds-cli</artifactId>
     <groupId>org.apache.jclouds.cli</groupId>
-    <version>1.6.3</version>
+    <version>1.6.4-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.apache.jclouds.cli</groupId>
   <artifactId>branding</artifactId>
-  <version>1.6.3</version>
+  <version>1.6.4-SNAPSHOT</version>
   <packaging>bundle</packaging>
   <name>jclouds :: cli :: branding</name>
 
