@@ -219,8 +219,6 @@
                 <feature>jclouds-serverlove-z1-man</feature>
                 <feature>jclouds-skalicloud-sdg-my</feature>
                 <feature>jclouds-softlayer</feature>
-                <feature>jclouds-trmk-ecloud</feature>
-                <feature>jclouds-trmk-vcloudexpress</feature>
                 <feature>jclouds-services</feature>
                 <feature>jclouds-commands</feature>
                 <feature>jclouds-chef</feature>
