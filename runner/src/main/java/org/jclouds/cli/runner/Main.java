@@ -56,6 +56,7 @@ import org.jclouds.blobstore.ContainerNotFoundException;
 import org.jclouds.blobstore.KeyNotFoundException;
 import org.jclouds.rest.AuthorizationException;
 import org.jclouds.rest.InsufficientResourcesException;
+import org.jclouds.rest.ResourceAlreadyExistsException;
 import org.jclouds.rest.ResourceNotFoundException;
 import org.jclouds.util.Throwables2;
 
@@ -74,6 +75,7 @@ public class Main {
         EIO(5),
         ENXIO(6),
         EACCES(13),
+        EEXIST(17),
         ETIMEDOUT(110),
         EDQUOT(122),
         UNKNOWN(255);
@@ -130,6 +132,7 @@ public class Main {
             exitIfThrowableMatches(t, IOException.class, Errno.EIO, "IO error");
             exitIfThrowableMatches(t, InsufficientResourcesException.class, Errno.EDQUOT, "Insufficient resources");
             exitIfThrowableMatches(t, KeyNotFoundException.class, Errno.ENOENT, "Blob not found");
+            exitIfThrowableMatches(t, ResourceAlreadyExistsException.class, Errno.EEXIST, "Resource already exists");
             // ContainerNotFoundException and KeyNotFoundException must precede ResourceNotFoundException due to inheritance
             exitIfThrowableMatches(t, ResourceNotFoundException.class, Errno.ENOENT, "Resource not found");
             exitIfThrowableMatches(t, TimeoutException.class, Errno.ETIMEDOUT, "Timeout");
