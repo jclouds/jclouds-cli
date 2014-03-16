@@ -219,6 +219,7 @@
                 <feature>jclouds-serverlove-z1-man</feature>
                 <feature>jclouds-skalicloud-sdg-my</feature>
                 <feature>jclouds-softlayer</feature>
+                <feature>jclouds-digitalocean</feature>
                 <feature>jclouds-services</feature>
                 <feature>jclouds-commands</feature>
                 <feature>jclouds-chef</feature>
