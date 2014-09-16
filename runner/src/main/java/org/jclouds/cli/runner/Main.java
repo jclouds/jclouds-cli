@@ -27,17 +27,17 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
-import java.net.UnknownHostException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
+import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.TimeoutException;
+
 import jline.Terminal;
+
 import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.CommandException;
@@ -59,6 +59,8 @@ import org.jclouds.rest.InsufficientResourcesException;
 import org.jclouds.rest.ResourceAlreadyExistsException;
 import org.jclouds.rest.ResourceNotFoundException;
 import org.jclouds.util.Throwables2;
+
+import com.google.common.collect.Lists;
 
 /**
  * This is forked from Apache Karaf and aligned to the needs of jclouds cli.
@@ -175,7 +177,7 @@ public class Main {
      * @throws IOException
      */
     public void loadJarsFromPath(File path) throws IOException {
-        Queue<File> dirs = new LinkedList<File>();
+        LinkedList<File> dirs = Lists.newLinkedList();
         dirs.add(path);
         while (!dirs.isEmpty()) {
             for (File f : dirs.poll().listFiles()) {
@@ -188,8 +190,8 @@ public class Main {
             }
         }
     }
-    public static void addURL(URL u) throws IOException
-    {
+
+    public static void addURL(URL u) throws IOException {
         URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
         Class sysclass = URLClassLoader.class;
 
@@ -208,13 +210,12 @@ public class Main {
 
         if (args.length > 0) {
             // Commands have the form: jclouds:category-action.
-            List<String> commands = new ArrayList<String>(
-                commandProcessor.getCommands());
+            List<String> commands = Lists.newArrayList(commandProcessor.getCommands());
             Collections.sort(commands);
             if (!commands.contains(args[0])) {
                 final String INDENT = "    ";
-                StringBuffer sb = new StringBuffer(
-                    "Usage: jclouds {category} {action} {options/arguments}");
+                StringBuilder sb = new StringBuilder(
+                      "Usage: jclouds {category} {action} {options/arguments}");
 
                 // list commands
                 sb.append("\n\nValid commands:");
@@ -391,7 +392,7 @@ public class Main {
     private static PrintStream wrap(PrintStream stream) {
         OutputStream o = AnsiConsole.wrapOutputStream(stream);
         if (o instanceof PrintStream) {
-            return ((PrintStream) o);
+            return (PrintStream) o;
         } else {
             return new PrintStream(o);
         }
@@ -407,7 +408,7 @@ public class Main {
     }
 
     private static List<URL> getFiles(File base) throws MalformedURLException {
-        List<URL> urls = new ArrayList<URL>();
+        List<URL> urls = Lists.newArrayList();
         getFiles(base, urls);
         return urls;
     }
