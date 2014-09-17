@@ -27,7 +27,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>runner</artifactId>
+  <artifactId>jclouds-cli-runner</artifactId>
   <name>jclouds :: cli :: runner</name>
 
   <dependencies>

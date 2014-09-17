@@ -27,7 +27,7 @@
     <version>2.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>branding</artifactId>
+  <artifactId>jclouds-cli-branding</artifactId>
   <packaging>bundle</packaging>
   <name>jclouds :: cli :: branding</name>
 
