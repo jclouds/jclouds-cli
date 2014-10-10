@@ -190,18 +190,14 @@
                 <feature>jclouds-aws-ec2</feature>
                 <feature>jclouds-aws-s3</feature>
                 <feature>jclouds-azureblob</feature>
-                <feature>jclouds-bluelock-vcloud-zone01</feature>
                 <feature>jclouds-cloudfiles-uk</feature>
                 <feature>jclouds-cloudfiles-us</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-us</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-uk</feature>
-                <feature>jclouds-cloudonestorage</feature>
                 <feature>jclouds-cloudserver-uk</feature>
                 <feature>jclouds-cloudserver-us</feature>
                 <feature>jclouds-rackspace-cloudservers-us</feature>
                 <feature>jclouds-rackspace-cloudservers-uk</feature>
-                <feature>jclouds-cloudsigma-zrh</feature>
-                <feature>jclouds-cloudsigma-lvs</feature>
                 <feature>jclouds-elastichosts-lon-b</feature>
                 <feature>jclouds-elastichosts-lon-p</feature>
                 <feature>jclouds-elastichosts-sat-p</feature>
@@ -209,11 +205,8 @@
                 <feature>jclouds-elastichosts-tor-p</feature>
                 <feature>jclouds-gogrid</feature>
                 <feature>jclouds-go2cloud-jhb1</feature>
-                <feature>jclouds-greenhousedata-element-vcloud</feature>
                 <feature>jclouds-hpcloud-objectstorage</feature>
                 <feature>jclouds-hpcloud-compute</feature>
-                <feature>jclouds-ninefold-storage</feature>
-                <feature>jclouds-ninefold-compute</feature>
                 <feature>jclouds-openhosting-east1</feature>
                 <feature>jclouds-serverlove-z1-man</feature>
                 <feature>jclouds-skalicloud-sdg-my</feature>
