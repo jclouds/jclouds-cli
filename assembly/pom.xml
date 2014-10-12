@@ -180,6 +180,7 @@
                 <feature>jclouds-url-handler</feature>
                 <feature>jclouds-api-byon</feature>
                 <feature>jclouds-api-chef</feature>
+                <feature>jclouds-api-cloudstack</feature>
                 <feature>jclouds-api-elasticstack</feature>
                 <feature>jclouds-api-ec2</feature>
                 <feature>jclouds-api-filesystem</feature>
