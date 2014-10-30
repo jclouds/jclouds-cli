@@ -186,6 +186,7 @@
                 <feature>jclouds-api-cloudstack</feature>
                 <feature>jclouds-api-rackspace-cloudidentity</feature>
                 <feature>jclouds-api-chef</feature>
+                <feature>jclouds-api-cloudsigma2</feature>
                 <feature>jclouds-aws-cloudwatch</feature>
                 <feature>jclouds-aws-ec2</feature>
                 <feature>jclouds-aws-s3</feature>
@@ -196,6 +197,11 @@
                 <feature>jclouds-rackspace-cloudloadbalancers-uk</feature>
                 <feature>jclouds-cloudserver-uk</feature>
                 <feature>jclouds-cloudserver-us</feature>
+                <feature>jclouds-cloudsigma2-hnl</feature>
+                <feature>jclouds-cloudsigma2-lvs</feature>
+                <feature>jclouds-cloudsigma2-sjc</feature>
+                <feature>jclouds-cloudsigma2-wdc</feature>
+                <feature>jclouds-cloudsigma2-zrh</feature>
                 <feature>jclouds-rackspace-cloudservers-us</feature>
                 <feature>jclouds-rackspace-cloudservers-uk</feature>
                 <feature>jclouds-elastichosts-lon-b</feature>
