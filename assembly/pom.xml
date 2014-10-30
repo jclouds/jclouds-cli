@@ -180,6 +180,7 @@
                 <feature>jclouds-url-handler</feature>
                 <feature>jclouds-api-byon</feature>
                 <feature>jclouds-api-chef</feature>
+                <feature>jclouds-api-cloudsigma2</feature>
                 <feature>jclouds-api-cloudstack</feature>
                 <feature>jclouds-api-elasticstack</feature>
                 <feature>jclouds-api-ec2</feature>
@@ -199,6 +200,11 @@
                 <feature>jclouds-cloudfiles-us</feature>
                 <feature>jclouds-cloudserver-uk</feature>
                 <feature>jclouds-cloudserver-us</feature>
+                <feature>jclouds-cloudsigma2-hnl</feature>
+                <feature>jclouds-cloudsigma2-lvs</feature>
+                <feature>jclouds-cloudsigma2-sjc</feature>
+                <feature>jclouds-cloudsigma2-wdc</feature>
+                <feature>jclouds-cloudsigma2-zrh</feature>
                 <feature>jclouds-digitalocean</feature>
                 <feature>jclouds-elastichosts-lon-b</feature>
                 <feature>jclouds-elastichosts-lon-p</feature>
