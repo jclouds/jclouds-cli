@@ -138,10 +138,17 @@
             <useTransitiveDependencies>false</useTransitiveDependencies>
         </dependencySet>
         <dependencySet>
-            <outputDirectory>/system/org/apache/jclouds/cli/runner/${project.version}/</outputDirectory>
+	    <outputDirectory>/system/com/google/guava/guava/${guava.version}/</outputDirectory>
             <fileMode>0644</fileMode>
             <includes>
-                <include>org.apache.jclouds.cli:runner</include>
+                <include>com.google:guava</include>
+            </includes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>/system/org/apache/jclouds/cli/jclouds-cli-runner/${project.version}/</outputDirectory>
+            <fileMode>0644</fileMode>
+            <includes>
+                <include>org.apache.jclouds.cli:jclouds-cli-runner</include>
             </includes>
         </dependencySet>
         <dependencySet>

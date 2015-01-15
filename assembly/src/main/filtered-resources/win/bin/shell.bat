@@ -111,7 +111,8 @@ if "%KARAF_DEBUG%" == "" goto :KARAF_DEBUG_END
     call :warn Enabling Java debug options: %JAVA_DEBUG_OPTS%
 :KARAF_DEBUG_END
 
-set CLASSPATH=%KARAF_HOME%\system\org\apache\jclouds\cli\runner\${project.version}\runner-${project.version}.jar
+set CLASSPATH=%KARAF_HOME%\system\org\apache\jclouds\cli\jclouds-cli-runner\${project.version}\jclouds-cli-runner-${project.version}.jar
+set CLASSPATH=%CLASSPATH%;%KARAF_HOME%\system\com\google\guava\guava/${guava.version}\guava-${guava.version}.jar"
 set CLASSPATH=%CLASSPATH%;%KARAF_HOME%\system\org\apache\jclouds\jclouds-core\${jclouds.version}\jclouds-core-${jclouds.version}.jar
 set CLASSPATH=%CLASSPATH%;%KARAF_HOME%\system\org\apache\jclouds\jclouds-blobstore\${jclouds.version}\jclouds-blobstore-${jclouds.version}.jar
 set CLASSPATH=%CLASSPATH%;%KARAF_HOME%\system\org\apache\karaf\shell\org.apache.karaf.shell.console\${karaf.version}\org.apache.karaf.shell.console-${karaf.version}.jar
