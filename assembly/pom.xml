@@ -34,7 +34,7 @@
   <dependencies>
     <dependency>
       <groupId>org.apache.jclouds.cli</groupId>
-      <artifactId>branding</artifactId>
+      <artifactId>jclouds-cli-branding</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>
