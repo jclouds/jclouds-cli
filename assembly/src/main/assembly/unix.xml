@@ -133,7 +133,7 @@
             <outputFileNameMapping>jclouds-version.jar</outputFileNameMapping>
             <fileMode>0644</fileMode>
             <includes>
-                <include>org.apache.jclouds.cli:branding</include>
+                <include>org.apache.jclouds.cli:jclouds-cli-branding</include>
             </includes>
             <useTransitiveDependencies>false</useTransitiveDependencies>
         </dependencySet>
