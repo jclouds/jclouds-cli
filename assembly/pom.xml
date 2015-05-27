@@ -192,6 +192,7 @@
                 <feature>jclouds-api-filesystem</feature>
                 <feature>jclouds-api-openstack-nova</feature>
                 <feature>jclouds-api-openstack-cinder</feature>
+                <feature>jclouds-api-openstack-swift</feature>
                 <feature>jclouds-api-rackspace-cloudidentity</feature>
                 <feature>jclouds-api-s3</feature>
                 <feature>jclouds-api-swift</feature>
