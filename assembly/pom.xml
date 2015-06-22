@@ -183,6 +183,7 @@
                 <feature>jclouds-guice</feature>
                 <feature>jclouds-services</feature>
                 <feature>jclouds-url-handler</feature>
+                <feature>jclouds-api-atmos</feature>
                 <feature>jclouds-api-byon</feature>
                 <feature>jclouds-api-chef</feature>
                 <feature>jclouds-api-cloudsigma2</feature>
