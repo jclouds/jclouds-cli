@@ -202,10 +202,6 @@
                 <feature>jclouds-aws-s3</feature>
                 <feature>jclouds-azureblob</feature>
                 <feature>jclouds-chef</feature>
-                <!-- TODO: remove? -->
-                <feature>jclouds-cloudfiles-uk</feature>
-                <!-- TODO: remove? -->
-                <feature>jclouds-cloudfiles-us</feature>
                 <feature>jclouds-cloudsigma2-hnl</feature>
                 <feature>jclouds-cloudsigma2-lvs</feature>
                 <feature>jclouds-cloudsigma2-sjc</feature>
