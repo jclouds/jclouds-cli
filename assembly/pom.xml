@@ -196,7 +196,6 @@
                 <feature>jclouds-api-openstack-swift</feature>
                 <feature>jclouds-api-rackspace-cloudidentity</feature>
                 <feature>jclouds-api-s3</feature>
-                <feature>jclouds-api-swift</feature>
                 <feature>jclouds-aws-cloudwatch</feature>
                 <feature>jclouds-aws-ec2</feature>
                 <feature>jclouds-aws-s3</feature>
