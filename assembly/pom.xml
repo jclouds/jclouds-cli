@@ -215,7 +215,6 @@
                 <feature>jclouds-elastichosts-tor-p</feature>
                 <feature>jclouds-gogrid</feature>
                 <feature>jclouds-go2cloud-jhb1</feature>
-                <feature>jclouds-hpcloud-objectstorage</feature>
                 <feature>jclouds-hpcloud-compute</feature>
                 <feature>jclouds-openhosting-east1</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-uk</feature>
