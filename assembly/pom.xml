@@ -206,7 +206,7 @@
                 <feature>jclouds-cloudsigma2-sjc</feature>
                 <feature>jclouds-cloudsigma2-wdc</feature>
                 <feature>jclouds-cloudsigma2-zrh</feature>
-                <feature>jclouds-digitalocean</feature>
+                <feature>jclouds-digitalocean2</feature>
                 <feature>jclouds-elastichosts-lon-b</feature>
                 <feature>jclouds-elastichosts-lon-p</feature>
                 <feature>jclouds-elastichosts-sat-p</feature>
@@ -214,7 +214,7 @@
                 <feature>jclouds-elastichosts-tor-p</feature>
                 <feature>jclouds-gogrid</feature>
                 <feature>jclouds-go2cloud-jhb1</feature>
-                <feature>jclouds-hpcloud-compute</feature>
+                <feature>jclouds-google-compute-engine</feature>
                 <feature>jclouds-openhosting-east1</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-uk</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-us</feature>
