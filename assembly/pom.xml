@@ -216,6 +216,7 @@
                 <feature>jclouds-go2cloud-jhb1</feature>
                 <feature>jclouds-google-compute-engine</feature>
                 <feature>jclouds-openhosting-east1</feature>
+                <feature>jclouds-profitbricks</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-uk</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-us</feature>
                 <feature>jclouds-rackspace-cloudservers-uk</feature>
