@@ -137,13 +137,13 @@
             </includes>
             <useTransitiveDependencies>false</useTransitiveDependencies>
         </dependencySet>
-        <dependencySet>
+        <!--dependencySet>
 	    <outputDirectory>/system/com/google/guava/guava/${guava.version}/</outputDirectory>
             <fileMode>0644</fileMode>
             <includes>
                 <include>com.google:guava</include>
             </includes>
-        </dependencySet>
+        </dependencySet-->
         <dependencySet>
             <outputDirectory>/system/org/apache/jclouds/cli/jclouds-cli-runner/${project.version}/</outputDirectory>
             <fileMode>0644</fileMode>
