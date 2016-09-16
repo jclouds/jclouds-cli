@@ -200,6 +200,7 @@
                 <feature>jclouds-aws-ec2</feature>
                 <feature>jclouds-aws-s3</feature>
                 <feature>jclouds-azureblob</feature>
+                <feature>jclouds-azurecompute-arm</feature>
                 <feature>jclouds-b2</feature>
                 <feature>jclouds-chef</feature>
                 <feature>jclouds-cloudsigma2-hnl</feature>
