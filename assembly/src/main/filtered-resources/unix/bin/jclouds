@@ -44,8 +44,7 @@ die() {
 }
 
 run() {
-    CMD="$KARAF_HOME/bin/shell jclouds:$CATEGORY-$ACTION ${@:3}"
-    exec $CMD
+    exec $KARAF_HOME/bin/shell jclouds:$CATEGORY-$ACTION "${@:3}"
 }
 
 main() {

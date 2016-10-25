@@ -254,7 +254,12 @@ public class Main {
                 if (i > 0) {
                     sb.append(" ");
                 }
-                sb.append(args[i]);
+                if (args[i].contains(" ")) {
+                    // quote arguments with spaces
+                    sb.append("\"").append(args[i]).append("\"");
+                } else {
+                    sb.append(args[i]);
+                }
             }
 
             // Shell is directly executing a sub/command, we don't setup a terminal and console
