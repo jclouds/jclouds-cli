@@ -36,6 +36,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
+import javax.script.ScriptEngineManager;
+
 import jline.Terminal;
 
 import org.apache.felix.gogo.commands.Action;
@@ -54,6 +56,9 @@ import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 import org.jclouds.blobstore.ContainerNotFoundException;
 import org.jclouds.blobstore.KeyNotFoundException;
+import org.jclouds.karaf.commands.compute.ComputeCommandBase;
+import org.jclouds.karaf.commands.table.BasicShellTableFactory;
+import org.jclouds.karaf.commands.table.ShellTableFactory;
 import org.jclouds.rest.AuthorizationException;
 import org.jclouds.rest.InsufficientResourcesException;
 import org.jclouds.rest.ResourceAlreadyExistsException;
@@ -344,7 +349,17 @@ public class Main {
                         @Override
                         public Action createNewAction() {
                             try {
-                                return ((Class<? extends Action>) actionClass).newInstance();
+                               Action action = ((Class< ? extends Action>) actionClass).newInstance();
+                               if (action instanceof ComputeCommandBase) {
+                                   ShellTableFactory shellTableFactory = ((ComputeCommandBase) action).getShellTableFactory();
+                                   if (shellTableFactory instanceof BasicShellTableFactory) {
+                                       BasicShellTableFactory factory = (BasicShellTableFactory) shellTableFactory;
+                                       if (factory.getScriptEngineManager() == null) {
+                                           factory.setScriptEngineManager(new ScriptEngineManager());
+                                       }
+                                   }
+                               }
+                               return action;
                             } catch (InstantiationException e) {
                                 throw new RuntimeException(e);
                             } catch (IllegalAccessException e) {

@@ -41,6 +41,12 @@
       <artifactId>jclouds-blobstore</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
+    
+    <dependency>
+      <groupId>org.apache.jclouds.karaf</groupId>
+      <artifactId>commands</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.apache.jclouds</groupId>
