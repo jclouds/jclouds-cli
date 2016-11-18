@@ -25,7 +25,7 @@
     <groupId>org.apache.jclouds.cli</groupId>
     <artifactId>jclouds-cli-project</artifactId>
     <relativePath>../project</relativePath>
-    <version>1.9.3</version>
+    <version>1.9.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>jclouds-cli-assembly</artifactId>
