@@ -229,6 +229,7 @@
                 <feature>jclouds-serverlove-z1-man</feature>
                 <feature>jclouds-skalicloud-sdg-my</feature>
                 <feature>jclouds-softlayer</feature>
+                <feature>jclouds-vagrant</feature>
               </features>
               <includeMvnBasedDescriptors>true</includeMvnBasedDescriptors>
               <repository>target/features-repo</repository>
