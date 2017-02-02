@@ -219,6 +219,7 @@
                 <feature>jclouds-google-compute-engine</feature>
                 <feature>jclouds-google-cloud-storage</feature>
                 <feature>jclouds-openhosting-east1</feature>
+                <feature>jclouds-packet</feature>
                 <feature>jclouds-profitbricks</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-uk</feature>
                 <feature>jclouds-rackspace-cloudloadbalancers-us</feature>
