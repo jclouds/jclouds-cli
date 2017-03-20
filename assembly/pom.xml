@@ -174,63 +174,19 @@
                 <descriptor>
                   mvn:org.apache.jclouds.karaf/jclouds-karaf/${jclouds.karaf.version}/xml/features
                 </descriptor>
+                <descriptor>
+                  mvn:org.apache.jclouds.karaf/jclouds-karaf-labs/${jclouds.karaf.version}/xml/features
+                </descriptor>
               </descriptors>
               <features>
                 <feature>config</feature>
-                <feature>jclouds</feature>
-                <feature>jclouds-commands</feature>
-                <feature>jclouds-compute</feature>
-                <feature>jclouds-guice</feature>
+                <feature>jclouds-all-compute</feature>
+                <feature>jclouds-all-blobstore</feature>
+                <feature>jclouds-labs-all-compute</feature>
+                <feature>jclouds-labs-all-blobstore</feature>
                 <feature>jclouds-services</feature>
+                <feature>jclouds-commands</feature>
                 <feature>jclouds-url-handler</feature>
-                <feature>jclouds-api-atmos</feature>
-                <feature>jclouds-api-byon</feature>
-                <feature>jclouds-api-chef</feature>
-                <feature>jclouds-api-cloudsigma2</feature>
-                <feature>jclouds-api-cloudstack</feature>
-                <feature>jclouds-api-elasticstack</feature>
-                <feature>jclouds-api-ec2</feature>
-                <feature>jclouds-api-filesystem</feature>
-                <feature>jclouds-api-openstack-nova</feature>
-                <feature>jclouds-api-openstack-cinder</feature>
-                <feature>jclouds-api-openstack-swift</feature>
-                <feature>jclouds-api-rackspace-cloudidentity</feature>
-                <feature>jclouds-api-s3</feature>
-                <feature>jclouds-aws-cloudwatch</feature>
-                <feature>jclouds-aws-ec2</feature>
-                <feature>jclouds-aws-s3</feature>
-                <feature>jclouds-azureblob</feature>
-                <feature>jclouds-azurecompute-arm</feature>
-                <feature>jclouds-b2</feature>
-                <feature>jclouds-chef</feature>
-                <feature>jclouds-cloudsigma2-hnl</feature>
-                <feature>jclouds-cloudsigma2-lvs</feature>
-                <feature>jclouds-cloudsigma2-sjc</feature>
-                <feature>jclouds-cloudsigma2-wdc</feature>
-                <feature>jclouds-cloudsigma2-zrh</feature>
-                <feature>jclouds-digitalocean2</feature>
-                <feature>jclouds-elastichosts-lon-b</feature>
-                <feature>jclouds-elastichosts-lon-p</feature>
-                <feature>jclouds-elastichosts-sat-p</feature>
-                <feature>jclouds-elastichosts-lax-p</feature>
-                <feature>jclouds-elastichosts-tor-p</feature>
-                <feature>jclouds-gogrid</feature>
-                <feature>jclouds-go2cloud-jhb1</feature>
-                <feature>jclouds-google-compute-engine</feature>
-                <feature>jclouds-google-cloud-storage</feature>
-                <feature>jclouds-openhosting-east1</feature>
-                <feature>jclouds-packet</feature>
-                <feature>jclouds-profitbricks</feature>
-                <feature>jclouds-rackspace-cloudloadbalancers-uk</feature>
-                <feature>jclouds-rackspace-cloudloadbalancers-us</feature>
-                <feature>jclouds-rackspace-cloudservers-uk</feature>
-                <feature>jclouds-rackspace-cloudservers-us</feature>
-                <feature>jclouds-rackspace-cloudfiles-uk</feature>
-                <feature>jclouds-rackspace-cloudfiles-us</feature>
-                <feature>jclouds-serverlove-z1-man</feature>
-                <feature>jclouds-skalicloud-sdg-my</feature>
-                <feature>jclouds-softlayer</feature>
-                <feature>jclouds-vagrant</feature>
               </features>
               <includeMvnBasedDescriptors>true</includeMvnBasedDescriptors>
               <repository>target/features-repo</repository>
