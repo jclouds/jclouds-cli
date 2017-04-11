@@ -29,6 +29,11 @@
 
   <artifactId>jclouds-cli-runner</artifactId>
   <name>jclouds :: cli :: runner</name>
+  <packaging>jar</packaging>
+
+  <properties>
+    <guava.version>18.0</guava.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -54,5 +59,7 @@
       <version>${project.parent.version}</version>
     </dependency>
   </dependencies>
+  
+  <build></build>
 
 </project>

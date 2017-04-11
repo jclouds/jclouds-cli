@@ -17,6 +17,34 @@
 
 package org.jclouds.cli.runner;
 
+import com.google.common.collect.Lists;
+import org.apache.felix.gogo.commands.Command;
+import org.apache.felix.gogo.commands.CommandException;
+import org.apache.felix.gogo.runtime.CommandNotFoundException;
+import org.apache.felix.gogo.runtime.CommandProcessorImpl;
+import org.apache.felix.gogo.runtime.threadio.ThreadIOImpl;
+import org.apache.felix.service.command.Function;
+import org.apache.felix.service.threadio.ThreadIO;
+import org.apache.karaf.shell.api.action.lifecycle.Manager;
+import org.apache.karaf.shell.api.console.Session;
+import org.apache.karaf.shell.api.console.SessionFactory;
+import org.apache.karaf.shell.api.console.Terminal;
+import org.apache.karaf.shell.console.NameScoping;
+import org.apache.karaf.shell.console.impl.jline.TerminalFactory;
+import org.apache.karaf.shell.impl.action.command.ManagerImpl;
+import org.apache.karaf.shell.impl.console.JLineTerminal;
+import org.apache.karaf.shell.impl.console.SessionFactoryImpl;
+import org.apache.karaf.shell.support.ShellUtil;
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
+import org.jclouds.blobstore.ContainerNotFoundException;
+import org.jclouds.blobstore.KeyNotFoundException;
+import org.jclouds.rest.AuthorizationException;
+import org.jclouds.rest.InsufficientResourcesException;
+import org.jclouds.rest.ResourceAlreadyExistsException;
+import org.jclouds.rest.ResourceNotFoundException;
+import org.jclouds.util.Throwables2;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,42 +58,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.UnknownHostException;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
-
-import javax.script.ScriptEngineManager;
-
-import jline.Terminal;
-
-import org.apache.felix.gogo.commands.Action;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.CommandException;
-import org.apache.felix.gogo.commands.basic.AbstractCommand;
-import org.apache.felix.gogo.runtime.CommandNotFoundException;
-import org.apache.felix.gogo.runtime.CommandProcessorImpl;
-import org.apache.felix.gogo.runtime.threadio.ThreadIOImpl;
-import org.apache.felix.service.command.CommandSession;
-import org.apache.felix.service.command.Function;
-import org.apache.karaf.shell.console.NameScoping;
-import org.apache.karaf.shell.console.jline.Console;
-import org.apache.karaf.shell.console.jline.TerminalFactory;
-import org.fusesource.jansi.Ansi;
-import org.fusesource.jansi.AnsiConsole;
-import org.jclouds.blobstore.ContainerNotFoundException;
-import org.jclouds.blobstore.KeyNotFoundException;
-import org.jclouds.karaf.commands.compute.ComputeCommandBase;
-import org.jclouds.karaf.commands.table.BasicShellTableFactory;
-import org.jclouds.karaf.commands.table.ShellTableFactory;
-import org.jclouds.rest.AuthorizationException;
-import org.jclouds.rest.InsufficientResourcesException;
-import org.jclouds.rest.ResourceAlreadyExistsException;
-import org.jclouds.rest.ResourceNotFoundException;
-import org.jclouds.util.Throwables2;
-
-import com.google.common.collect.Lists;
 
 /**
  * This is forked from Apache Karaf and aligned to the needs of jclouds cli.
@@ -166,14 +162,34 @@ public class Main {
         //This is a workaround for windows machines struggling with long class paths.
         loadJarsFromPath(new File(System.getProperty(KARAF_HOME), "system"));
         loadJarsFromPath(new File(System.getProperty(KARAF_HOME), "deploy"));
-        CommandProcessorImpl commandProcessor = new CommandProcessorImpl(threadio);
+//        ClassLoader cl = Main.class.getClassLoader();
+//        if (classpath != null) {
+//            List<URL> urls = getFiles(new File(classpath));
+//            cl = new URLClassLoader(urls.toArray(new URL[urls.size()]), cl);
+//        }
 
-        discoverCommands(commandProcessor, cl);
+
 
         InputStream in = unwrap(System.in);
         PrintStream out = wrap(unwrap(System.out));
         PrintStream err = wrap(unwrap(System.err));
-        run(commandProcessor, args, in, out, err);
+
+        SessionFactory sessionFactory = createSessionFactory(threadio);
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < args.length; i++) {
+            if (i > 0) {
+                sb.append(" ");
+            }
+            if (args[i].contains(" ")) {
+                // quote arguments with spaces
+                sb.append("\"").append(args[i]).append("\"");
+            } else {
+                sb.append(args[i]);
+            }
+        }
+
+        run(sessionFactory, threadio, sb.toString(), in, out, err, cl);
     }
 
 
@@ -211,9 +227,20 @@ public class Main {
 
     }
 
-    private void run(final CommandProcessorImpl commandProcessor, String[] args, final InputStream in, final PrintStream out, final PrintStream err) throws Exception {
+    private void run(SessionFactory sessionFactory, ThreadIO threadio, String command, final InputStream in, final PrintStream out, final PrintStream err, ClassLoader cl) throws Exception {
 
-        if (args.length > 0) {
+        final TerminalFactory terminalFactory = new TerminalFactory();
+        try {
+            final Terminal terminal = new JLineTerminal(terminalFactory.getTerminal());
+            Session session = createSession(sessionFactory, command.length() > 0 ? null : in, out, err, terminal);
+            session.put("USER", user);
+            session.put("APPLICATION", application);
+//            +            discoverCommands(session, cl, getDiscoveryResource());
+
+            discoverCommands(session, cl, getDiscoveryResource());
+
+            if (command.length() > 0) {
+/*
             // Commands have the form: jclouds:category-action.
             List<String> commands = Lists.newArrayList(commandProcessor.getCommands());
             Collections.sort(commands);
@@ -253,83 +280,46 @@ public class Main {
 
                 throw new CommandNotFoundException(sb.toString());
             }
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < args.length; i++) {
-                if (i > 0) {
-                    sb.append(" ");
-                }
-                if (args[i].contains(" ")) {
-                    // quote arguments with spaces
-                    sb.append("\"").append(args[i]).append("\"");
-                } else {
-                    sb.append(args[i]);
-                }
-            }
-
+*/
             // Shell is directly executing a sub/command, we don't setup a terminal and console
             // in this case, this avoids us reading from stdin un-necessarily.
-            CommandSession session = commandProcessor.createSession(in, out, err);
-            session.put("USER", user);
-            session.put("APPLICATION", application);
             session.put(NameScoping.MULTI_SCOPE_MODE_KEY, Boolean.toString(isMultiScopeMode()));
-            session.execute(sb);
+            session.put(Session.PRINT_STACK_TRACES, "execution");
+            try {
+                session.execute(command);
+            } catch (Throwable t) {
+                ShellUtil.logException(session, t);
+            }
         } else {
             // We are going into full blown interactive shell mode.
-
-            final TerminalFactory terminalFactory = new TerminalFactory();
-            final Terminal terminal = terminalFactory.getTerminal();
-            Console console = createConsole(commandProcessor, in, out, err, terminal);
-            CommandSession session = console.getSession();
-            session.put("USER", user);
-            session.put("APPLICATION", application);
-            session.put(NameScoping.MULTI_SCOPE_MODE_KEY, Boolean.toString(isMultiScopeMode()));
-            session.put("#LINES", new Function() {
-                public Object execute(CommandSession session, List<Object> arguments) throws Exception {
-                    return Integer.toString(terminal.getHeight());
-                }
-            });
-            session.put("#COLUMNS", new Function() {
-                public Object execute(CommandSession session, List<Object> arguments) throws Exception {
-                    return Integer.toString(terminal.getWidth());
-                }
-            });
-            session.put(".jline.terminal", terminal);
-
-            console.run();
-
+            session.run();
+        }
+        } finally {
             terminalFactory.destroy();
         }
-
     }
 
-    /**
-     * Allow sub classes of main to change the Console implementation used.
-     *
-     * @param commandProcessor
-     * @param in
-     * @param out
-     * @param err
-     * @param terminal
-     * @return
-     * @throws Exception
-     */
-    protected Console createConsole(CommandProcessorImpl commandProcessor, InputStream in, PrintStream out, PrintStream err, Terminal terminal) throws Exception {
-        return new Console(commandProcessor, in, out, err, terminal, null, null);
+    protected Session createSession(SessionFactory sessionFactory, InputStream in, PrintStream out, PrintStream err, Terminal terminal) throws Exception {
+        return sessionFactory.create(in, out, err, terminal, null, null);
+    }
+
+    protected SessionFactory createSessionFactory(ThreadIO threadio) {
+        SessionFactoryImpl sessionFactory = new SessionFactoryImpl(threadio);
+        sessionFactory.register(new ManagerImpl(sessionFactory, sessionFactory));
+        return sessionFactory;
     }
 
     /**
      * Sub classes can override so that their registered commands do not conflict with the default shell
      * implementation.
-     *
-     * @return
      */
     public String getDiscoveryResource() {
         return "META-INF/services/org/apache/karaf/shell/commands";
     }
 
-    private void discoverCommands(CommandProcessorImpl commandProcessor, ClassLoader cl) throws IOException, ClassNotFoundException {
-        Enumeration<URL> urls = cl.getResources(getDiscoveryResource());
+    private void discoverCommands(Session session, ClassLoader cl, String resource) throws IOException, ClassNotFoundException {
+        Manager manager = new ManagerImpl(session.getRegistry(), session.getFactory().getRegistry(), true);
+        Enumeration<URL> urls = cl.getResources(resource);
         while (urls.hasMoreElements()) {
             URL url = urls.nextElement();
             BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -343,31 +333,33 @@ public class Main {
                     if (line.isEmpty() || line.charAt(0) == '#') {
                         continue;
                     }
-                    final Class<Action> actionClass = (Class<Action>) cl.loadClass(line);
-                    Command cmd = actionClass.getAnnotation(Command.class);
-                    Function function = new AbstractCommand() {
-                        @Override
-                        public Action createNewAction() {
-                            try {
-                               Action action = ((Class< ? extends Action>) actionClass).newInstance();
-                               if (action instanceof ComputeCommandBase) {
-                                   ShellTableFactory shellTableFactory = ((ComputeCommandBase) action).getShellTableFactory();
-                                   if (shellTableFactory instanceof BasicShellTableFactory) {
-                                       BasicShellTableFactory factory = (BasicShellTableFactory) shellTableFactory;
-                                       if (factory.getScriptEngineManager() == null) {
-                                           factory.setScriptEngineManager(new ScriptEngineManager());
-                                       }
-                                   }
-                               }
-                               return action;
-                            } catch (InstantiationException e) {
-                                throw new RuntimeException(e);
-                            } catch (IllegalAccessException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    };
-                    addCommand(cmd, function, commandProcessor);
+//                    final Class<Action> actionClass = (Class<Action>) cl.loadClass(line);
+//                    Command cmd = actionClass.getAnnotation(Command.class);
+//                    Function function = new AbstractCommand() {
+//                        @Override
+//                        public Action createNewAction() {
+//                            try {
+//                               Action action = ((Class< ? extends Action>) actionClass).newInstance();
+//                               if (action instanceof ComputeCommandBase) {
+//                                   ShellTableFactory shellTableFactory = ((ComputeCommandBase) action).getShellTableFactory();
+//                                   if (shellTableFactory instanceof BasicShellTableFactory) {
+//                                       BasicShellTableFactory factory = (BasicShellTableFactory) shellTableFactory;
+//                                       if (factory.getScriptEngineManager() == null) {
+//                                           factory.setScriptEngineManager(new ScriptEngineManager());
+//                                       }
+//                                   }
+//                               }
+//                               return action;
+//                            } catch (InstantiationException e) {
+//                                throw new RuntimeException(e);
+//                            } catch (IllegalAccessException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//                        }
+//                    };
+//                    addCommand(cmd, function, commandProcessor);
+                    final Class<?> actionClass = cl.loadClass(line);
+                    manager.register(actionClass);
                 }
             } finally {
                 reader.close();
