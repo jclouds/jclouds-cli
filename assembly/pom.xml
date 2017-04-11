@@ -30,48 +30,30 @@
 
   <artifactId>jclouds-cli-assembly</artifactId>
   <name>jclouds :: cli :: assembly</name>
+  <packaging>karaf-assembly</packaging>
 
   <dependencies>
     <dependency>
-      <groupId>org.apache.jclouds.cli</groupId>
-      <artifactId>jclouds-cli-branding</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.jclouds.cli</groupId>
-      <artifactId>jclouds-cli-runner</artifactId>
-      <version>${project.parent.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>${guava.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.karaf</groupId>
-      <artifactId>apache-karaf</artifactId>
-      <type>tar.gz</type>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.karaf</groupId>
-      <artifactId>apache-karaf</artifactId>
-      <type>zip</type>
-    </dependency>
-
-    <!-- External Logging Dependencies -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <groupId>org.apache.karaf.features</groupId>
+      <artifactId>framework</artifactId>
+      <version>${karaf.version}</version>
+      <type>kar</type>
     </dependency>
 
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
+      <groupId>org.apache.karaf.features</groupId>
+      <artifactId>standard</artifactId>
+      <classifier>features</classifier>
+      <version>${karaf.version}</version>
+      <type>xml</type>
     </dependency>
 
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
+      <groupId>org.apache.karaf.features</groupId>
+      <artifactId>enterprise</artifactId>
+      <classifier>features</classifier>
+      <version>${karaf.version}</version>
+      <type>xml</type>
     </dependency>
 
   </dependencies>
@@ -81,229 +63,41 @@
       <resource>
         <directory>src/main/resources</directory>
         <filtering>false</filtering>
-      </resource>
-      <resource>
-        <directory>src/main/filtered-resources</directory>
         <includes>
           <include>**/*</include>
         </includes>
+      </resource>
+      <resource>
+        <directory>src/main/filtered-resources</directory>
         <filtering>true</filtering>
+        <includes>
+          <include>**/*</include>
+        </includes>
       </resource>
     </resources>
+
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>${maven-resources-plugin.version}</version>
-        <configuration>
-          <useDefaultDelimiters>false</useDefaultDelimiters>
-          <delimiters>
-            <delimiter>${*}</delimiter>
-          </delimiters>
-        </configuration>
-        <executions>
-          <execution>
-            <id>filter</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>resources</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>unpack-unix</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.apache.karaf</groupId>
-                  <artifactId>apache-karaf</artifactId>
-                  <version>${karaf.version}</version>
-                  <classifier>minimal</classifier>
-                  <type>tar.gz</type>
-                  <outputDirectory>target/dependencies/unix</outputDirectory>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-          <execution>
-            <id>unpack-win</id>
-            <phase>generate-resources</phase>
-            <goals>
-              <goal>unpack</goal>
-            </goals>
-            <configuration>
-              <artifactItems>
-                <artifactItem>
-                  <groupId>org.apache.karaf</groupId>
-                  <artifactId>apache-karaf</artifactId>
-                  <version>${karaf.version}</version>
-                  <classifier>minimal</classifier>
-                  <type>zip</type>
-                  <outputDirectory>target/dependencies/win</outputDirectory>
-                </artifactItem>
-              </artifactItems>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>org.apache.karaf.tooling</groupId>
-        <artifactId>features-maven-plugin</artifactId>
+        <artifactId>karaf-maven-plugin</artifactId>
         <version>${karaf.version}</version>
-        <executions>
-          <execution>
-            <id>add-features-to-repo</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>add-features-to-repo</goal>
-            </goals>
-            <configuration>
-              <descriptors>
-                <descriptor>
-                  mvn:org.apache.karaf.assemblies.features/standard/${karaf.version}/xml/features
-                </descriptor>
-                <descriptor>
-                  mvn:org.apache.jclouds.karaf/jclouds-karaf/${jclouds.karaf.version}/xml/features
-                </descriptor>
-              </descriptors>
-              <features>
-                <feature>config</feature>
-                <feature>jclouds</feature>
-                <feature>jclouds-commands</feature>
-                <feature>jclouds-compute</feature>
-                <feature>jclouds-guice</feature>
-                <feature>jclouds-services</feature>
-                <feature>jclouds-url-handler</feature>
-                <feature>jclouds-api-atmos</feature>
-                <feature>jclouds-api-byon</feature>
-                <feature>jclouds-api-chef</feature>
-                <feature>jclouds-api-cloudsigma2</feature>
-                <feature>jclouds-api-cloudstack</feature>
-                <feature>jclouds-api-elasticstack</feature>
-                <feature>jclouds-api-ec2</feature>
-                <feature>jclouds-api-filesystem</feature>
-                <feature>jclouds-api-openstack-nova</feature>
-                <feature>jclouds-api-openstack-cinder</feature>
-                <feature>jclouds-api-openstack-swift</feature>
-                <feature>jclouds-api-rackspace-cloudidentity</feature>
-                <feature>jclouds-api-s3</feature>
-                <feature>jclouds-aws-cloudwatch</feature>
-                <feature>jclouds-aws-ec2</feature>
-                <feature>jclouds-aws-s3</feature>
-                <feature>jclouds-azureblob</feature>
-                <feature>jclouds-azurecompute-arm</feature>
-                <feature>jclouds-b2</feature>
-                <feature>jclouds-chef</feature>
-                <feature>jclouds-cloudsigma2-hnl</feature>
-                <feature>jclouds-cloudsigma2-lvs</feature>
-                <feature>jclouds-cloudsigma2-sjc</feature>
-                <feature>jclouds-cloudsigma2-wdc</feature>
-                <feature>jclouds-cloudsigma2-zrh</feature>
-                <feature>jclouds-digitalocean2</feature>
-                <feature>jclouds-elastichosts-lon-b</feature>
-                <feature>jclouds-elastichosts-lon-p</feature>
-                <feature>jclouds-elastichosts-sat-p</feature>
-                <feature>jclouds-elastichosts-lax-p</feature>
-                <feature>jclouds-elastichosts-tor-p</feature>
-                <feature>jclouds-gogrid</feature>
-                <feature>jclouds-go2cloud-jhb1</feature>
-                <feature>jclouds-google-compute-engine</feature>
-                <feature>jclouds-google-cloud-storage</feature>
-                <feature>jclouds-openhosting-east1</feature>
-                <feature>jclouds-packet</feature>
-                <feature>jclouds-profitbricks</feature>
-                <feature>jclouds-rackspace-cloudloadbalancers-uk</feature>
-                <feature>jclouds-rackspace-cloudloadbalancers-us</feature>
-                <feature>jclouds-rackspace-cloudservers-uk</feature>
-                <feature>jclouds-rackspace-cloudservers-us</feature>
-                <feature>jclouds-rackspace-cloudfiles-uk</feature>
-                <feature>jclouds-rackspace-cloudfiles-us</feature>
-                <feature>jclouds-serverlove-z1-man</feature>
-                <feature>jclouds-skalicloud-sdg-my</feature>
-                <feature>jclouds-softlayer</feature>
-                <feature>jclouds-vagrant</feature>
-              </features>
-              <includeMvnBasedDescriptors>true</includeMvnBasedDescriptors>
-              <repository>target/features-repo</repository>
-            </configuration>
-            <inherited>false</inherited>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>${maven-antrun-plugin.version}</version>
-        <executions>
-          <execution>
-            <phase>prepare-package</phase>
-            <configuration>
-              <tasks>
-                <replace token="#!/bin/bash" value="#!/bin/sh"
-                         dir="target/dependencies/unix/apache-karaf-${karaf.version}/bin">
-                  <include name="*"/>
-                </replace>
-                <replaceregexp file="target/dependencies/unix/apache-karaf-${karaf.version}/etc/config.properties"
-                               match="karaf.framework.equinox=*"
-                               replace="#"
-                               byline="true"/>
-                <replaceregexp file="target/dependencies/win/apache-karaf-${karaf.version}/etc/config.properties"
-                               match="karaf.framework.equinox=*"
-                               replace="#"
-                               byline="true"/>
-              </tasks>
-            </configuration>
-            <goals>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>${maven-assembly-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>unix-bin</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <descriptors>
-                <descriptor>src/main/assembly/unix.xml</descriptor>
-              </descriptors>
-              <finalName>jclouds-cli-${project.version}</finalName>
-              <tarLongFileMode>gnu</tarLongFileMode>
-              <appendAssemblyId>false</appendAssemblyId>
-            </configuration>
-          </execution>
-          <execution>
-            <id>windows-bin</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <descriptors>
-                <descriptor>src/main/assembly/win.xml</descriptor>
-              </descriptors>
-              <finalName>jclouds-cli-${project.version}</finalName>
-              <appendAssemblyId>false</appendAssemblyId>
-            </configuration>
-          </execution>
-        </executions>
+        <extensions>true</extensions>
+        <configuration>
+          <installedFeatures>
+            <feature>wrapper</feature> <!-- https://karaf.apache.org/manual/latest/wrapper -->
+          </installedFeatures>
+          <installedBundles>
+            <bundle>mvn:org.apache.jclouds.cli/jclouds-cli-runner/2.1.0-SNAPSHOT</bundle>
+          </installedBundles>
+          <startupFeatures>
+            <feature>eventadmin</feature>
+          </startupFeatures>
+          <bootFeatures>
+            <!-- Goes into org.apache.karaf.features.cfg. Can use brackets to guide loading order (same as prerequisite). -->
+          </bootFeatures>
+        </configuration>
       </plugin>
     </plugins>
   </build>
+
 </project>
