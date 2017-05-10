@@ -49,9 +49,11 @@ import org.apache.felix.gogo.runtime.CommandProcessorImpl;
 import org.apache.felix.gogo.runtime.threadio.ThreadIOImpl;
 import org.apache.felix.service.command.CommandSession;
 import org.apache.felix.service.command.Function;
+import org.apache.felix.service.threadio.ThreadIO;
+import org.apache.karaf.shell.console.Console;
 import org.apache.karaf.shell.console.NameScoping;
-import org.apache.karaf.shell.console.jline.Console;
-import org.apache.karaf.shell.console.jline.TerminalFactory;
+import org.apache.karaf.shell.console.impl.jline.ConsoleImpl;
+import org.apache.karaf.shell.console.impl.jline.TerminalFactory;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 import org.jclouds.blobstore.ContainerNotFoundException;
@@ -173,7 +175,7 @@ public class Main {
         InputStream in = unwrap(System.in);
         PrintStream out = wrap(unwrap(System.out));
         PrintStream err = wrap(unwrap(System.err));
-        run(commandProcessor, args, in, out, err);
+        run(commandProcessor, threadio, args, in, out, err);
     }
 
 
@@ -211,7 +213,7 @@ public class Main {
 
     }
 
-    private void run(final CommandProcessorImpl commandProcessor, String[] args, final InputStream in, final PrintStream out, final PrintStream err) throws Exception {
+    private void run(final CommandProcessorImpl commandProcessor, ThreadIO threadio, String[] args, final InputStream in, final PrintStream out, final PrintStream err) throws Exception {
 
         if (args.length > 0) {
             // Commands have the form: jclouds:category-action.
@@ -276,10 +278,9 @@ public class Main {
             session.execute(sb);
         } else {
             // We are going into full blown interactive shell mode.
-
             final TerminalFactory terminalFactory = new TerminalFactory();
             final Terminal terminal = terminalFactory.getTerminal();
-            Console console = createConsole(commandProcessor, in, out, err, terminal);
+            Console console = createConsole(commandProcessor, threadio, in, out, err, terminal);
             CommandSession session = console.getSession();
             session.put("USER", user);
             session.put("APPLICATION", application);
@@ -314,8 +315,8 @@ public class Main {
      * @return
      * @throws Exception
      */
-    protected Console createConsole(CommandProcessorImpl commandProcessor, InputStream in, PrintStream out, PrintStream err, Terminal terminal) throws Exception {
-        return new Console(commandProcessor, in, out, err, terminal, null, null);
+    protected Console createConsole(CommandProcessorImpl commandProcessor, ThreadIO threadio, InputStream in, PrintStream out, PrintStream err, Terminal terminal) throws Exception {
+        return new ConsoleImpl(commandProcessor, threadio, in, out, err, terminal, null, null, null, false);
     }
 
     /**

@@ -28,7 +28,7 @@
     <fileSets>
         <!-- Strip the Karaf distribution -->
         <fileSet>
-            <directory>target/dependencies/win/apache-karaf-${karaf.version}</directory>
+            <directory>target/dependencies/win/apache-karaf-minimal-${karaf.version}</directory>
             <outputDirectory>/</outputDirectory>
             <excludes>
                 <exclude>**/demos/**</exclude>
@@ -58,7 +58,7 @@
 
         <!-- Copy over bin/* scripts separately to get the correct file mode -->
         <fileSet>
-            <directory>target/dependencies/win/apache-karaf-${karaf.version}</directory>
+            <directory>target/dependencies/win/apache-karaf-minimal-${karaf.version}</directory>
             <outputDirectory>/</outputDirectory>
             <includes>
                 <include>bin/*</include>
@@ -117,7 +117,7 @@
 
     <files>
         <file>
-            <source>${basedir}/target/dependencies/win/apache-karaf-${karaf.version}/bin/karaf.bat</source>
+            <source>${basedir}/target/dependencies/win/apache-karaf-minimal-${karaf.version}/bin/karaf.bat</source>
             <outputDirectory>/bin/</outputDirectory>
             <destName>jclouds-cli.bat</destName>
             <lineEnding>dos</lineEnding>
