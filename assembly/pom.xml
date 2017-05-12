@@ -179,7 +179,9 @@
               </descriptors>
               <features>
                 <feature>config</feature>
+                <feature>log</feature>
                 <feature>shell-compat</feature>
+                <feature>wrap</feature>
                 <feature>jclouds</feature>
                 <feature>jclouds-commands</feature>
                 <feature>jclouds-compute</feature>
