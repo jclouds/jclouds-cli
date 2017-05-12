@@ -116,15 +116,13 @@ To start the interactive shell:
 ./bin/jclouds-cli
 
 The interactive shell is a lightweight container powered by [Apache Karaf](http://karaf.apache.org) which is modular and extensible.
-Out of the box it has installed support of Amazon EC2, Amazon S3 and Chef. But you can easily add or remove providers, apis, drivers etc using the features commands:
+Out of the box it has installed support of all compute, blobstore providers and Chef. You can easily add or remove providers, apis, drivers etc using the features commands:
 
-    features:list
+    feature:list
 
-Will list all the available features, that you can install. Some examples of adding additional features:
+Will list all the available features, that you can install. Some examples of adding additional feature:
 
-    features:install jclouds-api-cloudstack
-    features:install jclouds-api-openstack-nova
-
+    feature:install jclouds-cloudsigma2-mia
 
 All commands that are available from the script are also available in the interactive mode. The only difference is that in the interactive mode the **category** and **action** are encoded in the command name.
 So all jclouds and chef commands follow the following format:
@@ -378,15 +376,7 @@ By default the delimiter is the semicolon symbol, but for each command category 
     hardware.headers=[id],[ram],[cpu],[cores]
 
 
-
 See also
 --------
 * https://github.com/jclouds/jclouds/
 * https://github.com/jclouds/jclouds-karaf/
-* https://github.com/jclouds/jclouds-chef/
-
-
-
-
-
-

@@ -31,7 +31,7 @@
   <artifactId>jclouds-cli-project</artifactId>
   <version>2.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>Apache jclouds :: cli</name>
+  <name>Apache jclouds :: cli :: project</name>
 
   <url>http://jclouds.apache.org</url>
   <licenses>
@@ -80,6 +80,7 @@
     <asm.version>5.0.4</asm.version>
     <felix.fileinstall.version>3.5.8</felix.fileinstall.version>
     <jclouds.karaf.version>${project.parent.version}</jclouds.karaf.version>
+    <jclouds.karaf.boot-features>jclouds-all-compute,jclouds-all-blobstore,jclouds-chef</jclouds.karaf.boot-features>
     <jclouds.version>${project.parent.version}</jclouds.version>
     <log4j.version>1.2.17</log4j.version>
     <slf4j.version>1.7.7</slf4j.version>

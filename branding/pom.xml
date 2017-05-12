@@ -29,7 +29,7 @@
 
   <artifactId>jclouds-cli-branding</artifactId>
   <packaging>bundle</packaging>
-  <name>jclouds :: cli :: branding</name>
+  <name>Apache jclouds :: cli :: branding</name>
 
   <properties>
     <osgi.export>org.apache.karaf.branding</osgi.export>

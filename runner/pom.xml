@@ -28,7 +28,7 @@
   </parent>
 
   <artifactId>jclouds-cli-runner</artifactId>
-  <name>jclouds :: cli :: runner</name>
+  <name>Apache jclouds :: cli :: runner</name>
 
   <dependencies>
     <dependency>
